@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import CountdownTimer from '@/components/CountdownTimer'
 import ChristmasScene from '@/components/ChristmasScene'
 import Snowfall from '@/components/Snowfall'
+import AdminPanel from '@/components/AdminPanel'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -31,6 +32,9 @@ export default function Home() {
       <div className="absolute top-0 left-0 right-0 z-50">
         <CountdownTimer />
       </div>
+
+      {/* Admin Panel for testing */}
+      <AdminPanel />
     </main>
   )
 }
