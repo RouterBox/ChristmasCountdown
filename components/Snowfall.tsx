@@ -12,7 +12,12 @@ export default function Snowfall() {
   }>>([])
 
   useEffect(() => {
-    const flakes = Array.from({ length: 50 }, (_, i) => ({
+    // Adjust snowflake count based on screen size
+    const isSmallScreen = window.innerWidth < 768
+    const isMediumScreen = window.innerWidth < 1920
+    const flakeCount = isSmallScreen ? 30 : isMediumScreen ? 40 : 50
+    
+    const flakes = Array.from({ length: flakeCount }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       delay: Math.random() * 10,

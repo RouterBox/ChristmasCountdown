@@ -33,11 +33,11 @@ export default function AdminPanel() {
       {/* Toggle button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-8 left-8 z-50 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-full p-4 border-2 border-white/30 transition-all"
+        className="fixed bottom-4 md:bottom-6 lg:bottom-8 left-4 md:left-6 lg:left-8 z-50 bg-black/50 hover:bg-black/70 backdrop-blur-md rounded-full p-3 md:p-4 border-2 border-white/30 transition-all"
         title="Admin Controls"
       >
         <svg 
-          className="w-6 h-6 text-white" 
+          className="w-5 h-5 md:w-6 md:h-6 text-white" 
           fill="none" 
           viewBox="0 0 24 24" 
           stroke="currentColor"
@@ -65,33 +65,33 @@ export default function AdminPanel() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -400, opacity: 0 }}
             transition={{ type: "spring", damping: 25 }}
-            className="fixed bottom-24 left-8 z-50 bg-black/80 backdrop-blur-xl rounded-2xl p-6 border-2 border-white/30 min-w-[300px]"
+            className="fixed bottom-16 md:bottom-20 lg:bottom-24 left-4 md:left-6 lg:left-8 z-50 bg-black/80 backdrop-blur-xl rounded-xl md:rounded-2xl p-4 md:p-6 border-2 border-white/30 min-w-[250px] md:min-w-[300px] max-w-[90vw]"
           >
-            <h3 className="text-xl font-bold mb-4 text-white">
+            <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-white">
               🎄 Admin Controls
             </h3>
             
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-3">
               <button
                 onClick={addElements}
                 disabled={isGenerating}
-                className="w-full bg-christmas-green hover:bg-green-700 disabled:bg-gray-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                className="w-full bg-christmas-green hover:bg-green-700 disabled:bg-gray-600 text-white font-semibold py-2 md:py-3 px-3 md:px-4 rounded-lg transition-colors text-sm md:text-base"
               >
                 {isGenerating ? '⏳ Adding...' : '➕ Add Elements Now'}
               </button>
 
               <button
                 onClick={clearAllElements}
-                className="w-full bg-christmas-red hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+                className="w-full bg-christmas-red hover:bg-red-700 text-white font-semibold py-2 md:py-3 px-3 md:px-4 rounded-lg transition-colors text-sm md:text-base"
               >
                 🗑️ Clear All Elements
               </button>
 
-              <div className="pt-3 border-t border-white/20">
-                <p className="text-sm text-white/70">
+              <div className="pt-2 md:pt-3 border-t border-white/20">
+                <p className="text-xs md:text-sm text-white/70">
                   <strong>Debug Info:</strong>
                 </p>
-                <p className="text-xs text-white/60 mt-1">
+                <p className="text-xs text-white/60 mt-1 break-all">
                   Last Update: {localStorage.getItem('lastElementUpdate') || 'Never'}
                 </p>
                 <p className="text-xs text-white/60">

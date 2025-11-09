@@ -57,3 +57,24 @@ body {
   animation: twinkle 2s ease-in-out infinite;
 }
 
+/* Responsive utilities */
+.responsive-element {
+  max-width: min(200px, 15vw);
+  max-height: min(200px, 15vh);
+}
+
+/* Ensure proper scaling on all screens */
+@media (max-width: 640px) {
+  .responsive-element {
+    max-width: min(120px, 20vw);
+    max-height: min(120px, 20vh);
+  }
+}
+
+@media (min-width: 2560px) {
+  .responsive-element {
+    max-width: min(250px, 12vw);
+    max-height: min(250px, 12vh);
+  }
+}
+

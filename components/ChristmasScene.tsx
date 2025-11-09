@@ -75,8 +75,8 @@ export default function ChristmasScene() {
               id: `element-${Date.now()}-${Math.random()}`,
               imageUrl: data.image.url,
               position: {
-                x: 10 + Math.random() * 60,
-                y: 30 + Math.random() * 50,
+                x: 5 + Math.random() * 70,
+                y: 25 + Math.random() * 60,
               },
               size: { width: 200, height: 200 },
               zIndex: Math.floor(Math.random() * 20) + 1,
@@ -124,8 +124,8 @@ export default function ChristmasScene() {
       id: `element-${Date.now()}-${Math.random()}`,
       imageUrl: element.emoji,
       position: {
-        x: 10 + Math.random() * 60, // 10-70% from left
-        y: 30 + Math.random() * 50, // 30-80% from top
+        x: 5 + Math.random() * 70, // 5-75% from left
+        y: 25 + Math.random() * 60, // 25-85% from top
       },
       size: element.size,
       zIndex: Math.floor(Math.random() * 20) + 1,
@@ -168,8 +168,9 @@ export default function ChristmasScene() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
+              className="responsive-element"
               style={{
-                fontSize: element.imageUrl.startsWith('http') ? undefined : `${element.size.width}px`,
+                fontSize: element.imageUrl.startsWith('http') ? undefined : 'clamp(60px, 8vw, 200px)',
                 filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.5))',
               }}
             >
@@ -179,7 +180,7 @@ export default function ChristmasScene() {
                   alt="Christmas element"
                   width={element.size.width}
                   height={element.size.height}
-                  className="rounded-lg"
+                  className="rounded-lg w-[clamp(80px,10vw,200px)] h-auto"
                 />
               ) : (
                 element.imageUrl
@@ -190,14 +191,14 @@ export default function ChristmasScene() {
       </AnimatePresence>
 
       {/* Progress indicator */}
-      <div className="absolute bottom-8 right-8 bg-black/30 backdrop-blur-md rounded-2xl p-6 border-2 border-christmas-gold">
-        <p className="text-xl text-christmas-gold font-semibold">
+      <div className="absolute bottom-4 md:bottom-6 lg:bottom-8 right-4 md:right-6 lg:right-8 bg-black/30 backdrop-blur-md rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-6 border border-christmas-gold md:border-2">
+        <p className="text-sm md:text-base lg:text-xl text-christmas-gold font-semibold">
           🎄 Scene Progress
         </p>
-        <p className="text-4xl font-bold mt-2">
+        <p className="text-2xl md:text-3xl lg:text-4xl font-bold mt-1 md:mt-2">
           {elements.length} elements
         </p>
-        <p className="text-sm text-christmas-snow mt-1 opacity-75">
+        <p className="text-xs md:text-sm text-christmas-snow mt-0.5 md:mt-1 opacity-75">
           Growing daily!
         </p>
       </div>
