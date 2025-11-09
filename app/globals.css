@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fredoka', 'Comic Sans MS', cursive;
+  background: linear-gradient(180deg, #0a1628 0%, #1a2f4a 50%, #2a3f5a 100%);
+  color: white;
+}
+
+.christmas-font {
+  font-family: 'Mountains of Christmas', 'Comic Sans MS', cursive;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.snowflake {
+  position: absolute;
+  color: white;
+  font-size: 1.5em;
+  opacity: 0.8;
+  animation: snowfall linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+                 0 0 40px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 1),
+                 0 0 60px rgba(255, 215, 0, 0.7);
+  }
+}
+
+.glow-text {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
