@@ -134,18 +134,18 @@ export default function ChristmasScene() {
 
   const generatePlaceholderElement = (): ChristmasElement => {
     const elementTypes = [
-      { emoji: '🎄', size: { width: 200, height: 250 } },
-      { emoji: '🎅', size: { width: 150, height: 180 } },
-      { emoji: '⛄', size: { width: 140, height: 160 } },
-      { emoji: '🎁', size: { width: 120, height: 120 } },
-      { emoji: '🦌', size: { width: 160, height: 140 } },
-      { emoji: '🔔', size: { width: 100, height: 100 } },
-      { emoji: '⭐', size: { width: 110, height: 110 } },
-      { emoji: '🕯️', size: { width: 80, height: 120 } },
-      { emoji: '🧦', size: { width: 90, height: 110 } },
-      { emoji: '🍬', size: { width: 80, height: 80 } },
-      { emoji: '🎀', size: { width: 90, height: 90 } },
-      { emoji: '❄️', size: { width: 100, height: 100 } },
+      { emoji: '🎄', size: { width: 50, height: 62 } },
+      { emoji: '🎅', size: { width: 38, height: 45 } },
+      { emoji: '⛄', size: { width: 35, height: 40 } },
+      { emoji: '🎁', size: { width: 30, height: 30 } },
+      { emoji: '🦌', size: { width: 40, height: 35 } },
+      { emoji: '🔔', size: { width: 25, height: 25 } },
+      { emoji: '⭐', size: { width: 28, height: 28 } },
+      { emoji: '🕯️', size: { width: 20, height: 30 } },
+      { emoji: '🧦', size: { width: 22, height: 28 } },
+      { emoji: '🍬', size: { width: 20, height: 20 } },
+      { emoji: '🎀', size: { width: 22, height: 22 } },
+      { emoji: '❄️', size: { width: 25, height: 25 } },
     ]
 
     const element = elementTypes[Math.floor(Math.random() * elementTypes.length)]
@@ -200,8 +200,8 @@ export default function ChristmasScene() {
               }}
               className="responsive-element"
               style={{
-                fontSize: element.imageUrl.startsWith('http') ? undefined : 'clamp(60px, 8vw, 200px)',
-                filter: 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.5))',
+                fontSize: element.imageUrl.startsWith('http') ? undefined : 'clamp(15px, 2vw, 50px)',
+                filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))',
               }}
             >
               {element.imageUrl.startsWith('http') ? (
@@ -210,7 +210,7 @@ export default function ChristmasScene() {
                   alt="Christmas element"
                   width={element.size.width}
                   height={element.size.height}
-                  className="rounded-lg w-[clamp(80px,10vw,200px)] h-auto"
+                  className="rounded-lg w-[clamp(20px,2.5vw,50px)] h-auto"
                 />
               ) : (
                 element.imageUrl

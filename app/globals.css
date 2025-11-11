@@ -59,22 +59,22 @@ body {
 
 /* Responsive utilities */
 .responsive-element {
-  max-width: min(200px, 15vw);
-  max-height: min(200px, 15vh);
+  max-width: min(50px, 4vw);
+  max-height: min(50px, 4vh);
 }
 
 /* Ensure proper scaling on all screens */
 @media (max-width: 640px) {
   .responsive-element {
-    max-width: min(120px, 20vw);
-    max-height: min(120px, 20vh);
+    max-width: min(30px, 5vw);
+    max-height: min(30px, 5vh);
   }
 }
 
 @media (min-width: 2560px) {
   .responsive-element {
-    max-width: min(250px, 12vw);
-    max-height: min(250px, 12vh);
+    max-width: min(62px, 3vw);
+    max-height: min(62px, 3vh);
   }
 }
 

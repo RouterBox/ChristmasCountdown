@@ -1,0 +1,34 @@
+# Christmas Countdown - Environment Variables
+# INSTRUCTIONS: Rename this file to .env.local after adding your API key
+
+# Leonardo.ai API Key
+# Get your API key from: https://app.leonardo.ai/settings
+# Navigate to: Settings > User API > Create API Key
+LEONARDO_API_KEY=your_leonardo_api_key_here
+
+# Optional: Uncomment to use a specific Leonardo model
+# LEONARDO_MODEL_ID=aa77f04e-3eec-4034-9c07-d0f619684628
+
+# ============================================================================
+# IMPORTANT NOTES:
+# ============================================================================
+# 
+# 1. After adding your key, rename this file to: .env.local
+#    (Remove the .txt extension entirely)
+#
+# 2. If you don't have a Leonardo API key, that's OK!
+#    The app will automatically fall back to using festive Christmas emojis
+#    (🎄🎅⛄🎁🦌) which look great and cost nothing!
+#
+# 3. To get a FREE Leonardo.ai API key:
+#    - Go to https://app.leonardo.ai/
+#    - Sign up (free account)
+#    - Go to Settings > User API
+#    - Click "Create API Key"
+#    - Copy and paste it above
+#    - Free tier gives ~150 images/month (plenty for this project!)
+#
+# 4. This file should NEVER be committed to git (it's in .gitignore)
+#
+# ============================================================================
+
