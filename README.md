@@ -7,10 +7,11 @@ A magical, progressive Christmas countdown web app built for a 4-year-old! Watch
 ## ✨ Features
 
 - **🕐 Real-time Countdown**: Days, hours, minutes, and seconds until 8:00 AM on Christmas morning
-- **🎨 Progressive Scene Building**: Adds 1-3 new Christmas elements each day
+- **🎨 Progressive Scene Building**: Automatically adds 1 new Christmas element every 6 hours
+- **🔄 Auto-Update**: No refresh needed - elements appear automatically while display is running
 - **❄️ Animated Snowfall**: Beautiful snowflakes falling continuously
 - **🎅 Leonardo.ai Integration**: Generates unique Christmas-themed assets
-- **📱 4K Portrait Display**: Optimized for full-screen portrait 4K monitors
+- **📱 Fully Responsive**: Works on portrait 4K, landscape 4K, 1080p, and all screen sizes
 - **💫 Smooth Animations**: Framer Motion powered animations
 
 ## 🚀 Getting Started
@@ -52,10 +53,12 @@ npm run dev
 The app calculates time remaining until 8:00 AM on December 25th and updates every second with a beautiful animated display.
 
 ### Progressive Scene Building
-- Each day, 1-3 new Christmas elements are added to the scene
+- Every 6 hours, 1 new Christmas element is automatically added
+- Works continuously without requiring page refresh
 - Elements are positioned randomly and animated with spring physics
 - Progress is saved to localStorage
 - Elements twinkle and gently sway for a magical effect
+- Perfect for displays left running 24/7
 
 ### Leonardo.ai Integration
 - Generates high-quality Christmas-themed images on demand
@@ -107,11 +110,16 @@ let christmas = new Date(currentYear, 11, 25, 8, 0, 0)
 //                                    ^month ^day ^hour
 ```
 
-### Change Elements Per Day
+### Change Element Addition Frequency
 Edit `components/ChristmasScene.tsx`:
 ```typescript
-const numElements = Math.floor(Math.random() * 3) + 1
-//                                             ^max    ^min
+const sixHoursInMs = 6 * 60 * 60 * 1000 // 6 hours in milliseconds
+//                   ^ Change this number for different intervals
+// Examples:
+// 1 hour:  1 * 60 * 60 * 1000
+// 3 hours: 3 * 60 * 60 * 1000
+// 12 hours: 12 * 60 * 60 * 1000
+// 1 day: 24 * 60 * 60 * 1000
 ```
 
 ### Customize Leonardo.ai Prompts

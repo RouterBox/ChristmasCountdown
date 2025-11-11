@@ -40,26 +40,51 @@ export default function ChristmasScene() {
       setElements(parsed)
     }
 
-    // Check if we need to add new elements for today
-    checkAndAddDailyElements()
+    // Check if we need to add new elements immediately
+    checkAndAddElements()
+
+    // Set up interval to check every minute if 6 hours have passed
+    const intervalId = setInterval(() => {
+      checkAndAddElements()
+    }, 60000) // Check every 60 seconds
+
+    return () => clearInterval(intervalId)
   }, [])
 
-  const checkAndAddDailyElements = async () => {
-    const today = new Date().toDateString()
-    const lastUpdate = localStorage.getItem('lastElementUpdate')
+  const checkAndAddElements = async () => {
+    const now = Date.now()
+    const lastUpdateStr = localStorage.getItem('lastElementUpdate')
     
-    if (lastUpdate !== today) {
-      // Add 1-3 new elements
-      const numElements = Math.floor(Math.random() * 3) + 1
-      await addNewElements(numElements)
-      localStorage.setItem('lastElementUpdate', today)
+    // If no last update, set it to now and add first element
+    if (!lastUpdateStr) {
+      await addNewElements(1)
+      localStorage.setItem('lastElementUpdate', now.toString())
+      return
+    }
+    
+    const lastUpdate = parseInt(lastUpdateStr, 10)
+    const sixHoursInMs = 6 * 60 * 60 * 1000 // 6 hours in milliseconds
+    const timeSinceLastUpdate = now - lastUpdate
+    
+    // Check if 6 hours have passed
+    if (timeSinceLastUpdate >= sixHoursInMs) {
+      // Calculate how many 6-hour periods have passed
+      const periodsElapsed = Math.floor(timeSinceLastUpdate / sixHoursInMs)
+      
+      // Add one element for each period (usually just 1, but handles longer gaps)
+      await addNewElements(periodsElapsed)
+      
+      // Update timestamp to now
+      localStorage.setItem('lastElementUpdate', now.toString())
     }
   }
 
   const addNewElements = async (count: number) => {
-    const newElements: ChristmasElement[] = []
+    console.log(`🎄 Adding ${count} new Christmas element(s)!`)
     
     for (let i = 0; i < count; i++) {
+      let newElement: ChristmasElement | null = null
+      
       // Try to generate with Leonardo.ai API, fallback to emoji
       try {
         const response = await fetch('/api/generate-element', {
@@ -71,7 +96,7 @@ export default function ChristmasScene() {
         if (response.ok) {
           const data = await response.json()
           if (data.image) {
-            const element: ChristmasElement = {
+            newElement = {
               id: `element-${Date.now()}-${Math.random()}`,
               imageUrl: data.image.url,
               position: {
@@ -82,8 +107,6 @@ export default function ChristmasScene() {
               zIndex: Math.floor(Math.random() * 20) + 1,
               addedDate: new Date().toISOString(),
             }
-            newElements.push(element)
-            continue
           }
         }
       } catch (error) {
@@ -91,15 +114,22 @@ export default function ChristmasScene() {
       }
       
       // Fallback to emoji placeholder
-      const element = generatePlaceholderElement()
-      newElements.push(element)
+      if (!newElement) {
+        newElement = generatePlaceholderElement()
+      }
+      
+      // Add element immediately and update state
+      setElements(prev => {
+        const updated = [...prev, newElement!]
+        localStorage.setItem('christmasElements', JSON.stringify(updated))
+        return updated
+      })
+      
+      // Small delay between multiple elements if catching up
+      if (i < count - 1) {
+        await new Promise(resolve => setTimeout(resolve, 1000))
+      }
     }
-    
-    setElements(prev => {
-      const updated = [...prev, ...newElements]
-      localStorage.setItem('christmasElements', JSON.stringify(updated))
-      return updated
-    })
   }
 
   const generatePlaceholderElement = (): ChristmasElement => {

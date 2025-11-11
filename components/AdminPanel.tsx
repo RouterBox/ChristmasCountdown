@@ -1,11 +1,63 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function AdminPanel() {
   const [isOpen, setIsOpen] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
+  const [timeInfo, setTimeInfo] = useState({ lastUpdate: '', nextUpdate: '' })
+
+  useEffect(() => {
+    // Update time info every second
+    const updateTimeInfo = () => {
+      setTimeInfo({
+        lastUpdate: getLastUpdateTime(),
+        nextUpdate: getTimeUntilNext(),
+      })
+    }
+
+    updateTimeInfo()
+    const interval = setInterval(updateTimeInfo, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const getLastUpdateTime = () => {
+    const lastUpdateStr = localStorage.getItem('lastElementUpdate')
+    if (!lastUpdateStr) return 'Never'
+    
+    const lastUpdate = parseInt(lastUpdateStr, 10)
+    const now = Date.now()
+    const diff = now - lastUpdate
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60))
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+    
+    if (hours > 0) return `${hours}h ${minutes}m ago`
+    if (minutes > 0) return `${minutes}m ago`
+    return 'Just now'
+  }
+
+  const getTimeUntilNext = () => {
+    const lastUpdateStr = localStorage.getItem('lastElementUpdate')
+    if (!lastUpdateStr) return 'Soon'
+    
+    const lastUpdate = parseInt(lastUpdateStr, 10)
+    const sixHours = 6 * 60 * 60 * 1000
+    const nextUpdate = lastUpdate + sixHours
+    const now = Date.now()
+    const diff = nextUpdate - now
+    
+    if (diff <= 0) return 'Now!'
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60))
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+    
+    if (hours > 0) return `${hours}h ${minutes}m`
+    if (minutes > 0) return `${minutes}m ${seconds}s`
+    return `${seconds}s`
+  }
 
   const addElements = async () => {
     setIsGenerating(true)
@@ -91,8 +143,11 @@ export default function AdminPanel() {
                 <p className="text-xs md:text-sm text-white/70">
                   <strong>Debug Info:</strong>
                 </p>
-                <p className="text-xs text-white/60 mt-1 break-all">
-                  Last Update: {localStorage.getItem('lastElementUpdate') || 'Never'}
+                <p className="text-xs text-white/60 mt-1">
+                  Last: {timeInfo.lastUpdate}
+                </p>
+                <p className="text-xs text-white/60">
+                  Next in: {timeInfo.nextUpdate}
                 </p>
                 <p className="text-xs text-white/60">
                   Elements: {JSON.parse(localStorage.getItem('christmasElements') || '[]').length}

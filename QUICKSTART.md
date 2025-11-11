@@ -62,9 +62,10 @@ git push -u origin main
 
 - **Big countdown** at the top (days, hours, mins, secs)
 - **Snowfall** animation in background
-- **New Christmas elements** appear daily (or click Add Elements button)
+- **New Christmas elements** appear automatically every 6 hours (no refresh needed!)
 - **Twinkling, swaying animations** on all elements
 - **Beautiful gradient** night sky background
+- **Live progress tracker** showing when next element appears
 
 ## 📞 Need Help?
 
